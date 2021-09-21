@@ -1,0 +1,104 @@
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    body{
+        background-color: #077CB4 ;
+    }
+    h2{
+        padding: 20px 0;
+        height: 80px;
+        background-color:#FA8072 ;
+    }
+    input{
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+
+	input::placeholder {
+	  color: #d3d3d3;
+	}
+
+	.submit{
+		background-color: #6BA3E8;
+	}
+    .center-column{
+		width:600px;
+		margin: 20px auto;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 3px;
+		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	}
+    .addbody{
+        padding:10px;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: medium;
+        margin-bottom:20px
+    }
+    .addbody2{
+    
+       
+        border-radius: 3px;
+        border-style: solid;
+        border-width: medium;
+       
+    }
+    .list-item{
+        border-style: solid;
+        border-width: medium;
+        box-sizing: border-box;
+        background-color: #FFA07A;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 3px;
+		color: black;
+    }
+
+    .btn-danger{
+		background-color: #ffffff;
+		
+        color: black;
+	}
+    
+</style>
+
+<body>
+<div class="center-column">
+<h2 align='center'> TODO App </h2>
+<div class="addbody">
+    <form method='POST' action='/' >  {% csrf_token %}
+    <div >
+        {{ form.title}}
+        <input class="btn btn-info" type='submit' value='Save' />
+    </div>
+</div>
+</form>
+
+
+<div class="addbody2 ">
+   
+    {% for task in my_task %}
+    <div class=" list-item">
+    <br>
+    <button type="button" class="btn btn-danger btn-sm">
+    <a href="{% url 'update' task.id %}">Update </a>
+    </button>
+    <button type="button" class="btn btn-danger  btn-sm ">
+    <a href="{% url 'delete' task.id %}">Delete </a>
+    </button>
+    
+    {% if task.complete == True %}
+			<strike>{{task.title}}</strike>
+			{% else %}
+			<span>{{task.title}}</span>
+			{% endif %}
+    <br>
+    </div>
+    {% endfor %}
+    
+</div>
+</div>
+</body>
